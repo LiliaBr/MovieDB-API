@@ -9,7 +9,7 @@ import NetworkDetector from './networkDetector';
 import _debounce from './_debounce';
 
 import 'antd/dist/antd.css';
-import './app.css';
+import './App.css';
 
 class App extends Component {
   constructor(props) {
