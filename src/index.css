@@ -6,8 +6,6 @@ body {
   padding: 0;
 }
 
-
-/* AntD styling */
 .ant-tabs-top>.ant-tabs-nav::before {
   border-bottom: none;
 }
@@ -28,11 +26,9 @@ body {
   margin: 0 0 0 22px;
 }
 
-
 .ant-row {
   margin: 32px;
 }
-
 
 .ant-pagination-item-active {
   background: #1890FF;
@@ -47,7 +43,6 @@ body {
 .ant-pagination-item-active:hover a {
   color: #FFF;
 }
-
 
 .ant-spin-lg .ant-spin-dot {
   font-size: 48px;

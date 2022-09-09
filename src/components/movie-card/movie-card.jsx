@@ -11,10 +11,10 @@ import './movie-card.css';
 
 export default class MovieCard extends Component {
   state = {
-    stars: +localStorage.getItem(this.props.id) ?? 0
+    stars: localStorage.getItem(this.props.id)
   };
 
-  #dateFormat = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  dateFormat = new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
 
   #limitString(text, limit, params = {}) {
     limit = parseInt(limit) || 0;
@@ -35,7 +35,7 @@ export default class MovieCard extends Component {
 
     let lastSpace = text.lastIndexOf('\u0020');
     for (let char = lastSpace; char >= 0; lastSpace--)
-      if (!'.,!?:;-\u0020\u2013\u2014\u2026'.includes(text[--char])) break;
+      if (!'.,!?:;-\u2026'.includes(text[--char])) break;
 
     if (!options.strict && lastSpace > 0) text = text.slice(0, lastSpace);
     return text + options.tail;
@@ -57,6 +57,11 @@ export default class MovieCard extends Component {
   render() {
     const { poster_path, vote_average, title, release_date, genre_ids, overview, id } = this.props;
 
+    const voteColor = (vote_average < 3 && ' red')
+      || (vote_average < 5 && ' orange')
+      || (vote_average < 7 && ' yellow')
+      || ' green';
+
     return (
       <div className='movie-card'>
         <img className='movie-card__pic' src={
@@ -68,17 +73,11 @@ export default class MovieCard extends Component {
         <div className='movie-card__info'>
           <div className='movie-card__cap'>
             <h2>{title}</h2>
-            <div className={'movie-card__avg' + (
-              (vote_average < 3 && ' red')
-              || (vote_average < 5 && ' orange')
-              || (vote_average < 7 && ' yellow')
-              || ' green'
-            )
-            }>
+            <div className={'movie-card__avg' + voteColor}>
               {vote_average.toFixed(1)}
             </div>
           </div>
-          <div>{release_date.length ? this.#dateFormat.format(new Date(release_date)) : 'Coming soon…'}</div>
+          <div>{release_date.length ? this.dateFormat.format(new Date(release_date)) : 'Coming soon…'}</div>
           <div className='movie-card__tags'>
             <MovieDB_Consumer>
               {genres => genre_ids.map((id, index) => {

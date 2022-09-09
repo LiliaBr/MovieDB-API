@@ -4,7 +4,7 @@ import { LoadingOutlined } from '@ant-design/icons';
 
 import MovieDB_API from './services/index';
 import { MovieDB_Provider } from './moviedb_context';
-import MovieCard from './components/movie-card/index';
+import MovieCard from './components/movie-card/movie-card';
 import NetworkDetector from './networkDetector';
 import _debounce from './_debounce';
 
@@ -39,7 +39,6 @@ class App extends Component {
       this.updateDB(page);
     else
       this.showRated(page);
-    console.log('handlePageChange: loading movies…');
   }
 
   handleTabChange = (activeTabKey) => {
@@ -76,7 +75,6 @@ class App extends Component {
   }
 
   render() {
-    console.log('render');
 
     const cards = [], movies = this.state.movies;
     for (let i = 0, k = 1; i < movies.length; i += 2, k++) {

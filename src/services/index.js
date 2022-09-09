@@ -1,6 +1,6 @@
 export default class MoveDB_API {
-  static #api = 'https://api.themoviedb.org/3';
-  static #api_key = 'afd969831ed06c467f48ec70164a65bb';
+  static #api = "https://api.themoviedb.org/3";
+  static #api_key = "afd969831ed06c467f48ec70164a65bb";
 
   static async #fetchData(request) {
     const data = await fetch(request);
@@ -9,7 +9,7 @@ export default class MoveDB_API {
     return data.json();
   }
 
-  static async getMovies(count, query = 'return', page = 1) {
+  static async getMovies(count, query = "return", page = 1) {
     if (!query) return [];
     const json = await this.#fetchData(
       `${this.#api}/search/movie?api_key=${
